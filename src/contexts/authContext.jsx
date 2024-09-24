@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { toast } from "react-toastify";
+import axios from 'axios'
 
 const AuthContext = createContext();
 
@@ -16,18 +16,16 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const login = (userData) => {
-    console.log(userData);
-    if (
-      (userData.email === "corinthians123@gmail.com" &&
-      userData.password === "vaicurintia123!") ||
-      (userData.email === "admin@gmail.com" && userData.password == "123456")
-    ) {
-      setUser(userData);
-      localStorage.setItem("@user", JSON.stringify(userData));
+    axios.post("https://api-infnet-produtos-privado.vercel.app/auth", userData)
+    .then(res =>  {
+      console.log(res.data);
+      setUser(res.data);
+      localStorage.setItem("@user", JSON.stringify(res.data));
       navigate("/products");
-    } else {
+    })
+    .catch(er=>{
       toast.error("Erro na autenticação");
-    }
+    });
   };
 
   const logout = () => {
