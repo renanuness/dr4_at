@@ -44,6 +44,7 @@ export default function Products(){
                 <ProductCard key={product.id} product={product} productDetail={(id)=>navigate('/productDetail/'+id)}/>
             )}
             </div>
+            <button onClick={()=>navigate("/products/add")} className="mb-2 p-2 border bg-blue-600">Adicionar produto</button>
         </div>
     )
 }

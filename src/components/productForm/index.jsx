@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function ProductForm(props){
     const [product, setProduct] = useState(props.product);
-
+    const action = props.action;
 
     const {
         register,
@@ -17,7 +17,7 @@ export default function ProductForm(props){
         resolver: yupResolver(productSchema) });
 
     const onSubmit = async (data) => {
-        props.editProduct(data);
+        props.submit(data);
     };
 
     useEffect(()=>{
@@ -30,31 +30,50 @@ export default function ProductForm(props){
 
     return(
         <form className="mt-4 w-[60%] mx-auto" onSubmit={handleSubmit(onSubmit)}>
-            <input 
+                        <input 
                 className="rounded-md bg-slate-300 p-2"
-                placeholder="Título" 
-                {...register("title")} />
-            <p>{errors.title?.message}</p>
+                placeholder="Descrição" 
+                {...register("descricao")} />
+            <p>{errors.descricao?.message}</p>
 
             <br />
 
             <input
                 className="rounded-md bg-slate-300 p-2 break-words"
                 type="text"
-                placeholder="Descrição"
-                {...register("description")}
+                placeholder="Fornecedor"
+                {...register("fornecedor")}
             />
-            <p>{errors.description?.message}</p>
+            <p>{errors.fornecedor?.message}</p>
             <br />
 
             <input
                 className="rounded-md bg-slate-300 p-2"
                 type="text"
-                placeholder="Preço"
-                {...register("price")}
+                placeholder="Nome"
+                {...register("nome")}
             />
-            <p>{errors.price?.message}</p>
-            <button className="mt-2 rounded-md bg-green-300 p-2">Atualizar</button>
+            <p>{errors.nome?.message}</p>
+
+            <input
+                className="rounded-md bg-slate-300 p-2"
+                type="text"
+                placeholder="Preço"
+                {...register("preco")}
+            />
+            <p>{errors.preco?.message}</p>
+
+            <input
+                className="rounded-md bg-slate-300 p-2"
+                type="text"
+                placeholder="Url Imagem"
+                {...register("url_imagem")}
+            />
+            <p>{errors.url_imagem?.message}</p>
+            
+            { action == 'add' ?
+                <input type="submit" className="mt-2 rounded-md bg-green-300 p-2" value="Adicionar"/> :
+                <input type="submit" className="mt-2 rounded-md bg-green-300 p-2" value="Atualizar"/>}
         </form>
     )
 } 

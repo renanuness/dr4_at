@@ -18,6 +18,7 @@ import Products from "./pages/products/index.jsx";
 import ProductDetail from "./pages/productDetail/index.jsx";
 import EditProduct from "./pages/editProduct/index.jsx";
 import Saved from "./pages/saved/index.jsx";
+import AddProduct from "./pages/products/add/index.jsx";
 
 const PrivateRoute = ({ children }) => {
   const { isLogged } = useAuth();
@@ -59,6 +60,16 @@ function App() {
               <PrivateRoute>
                 <Header />
                 <Products/>
+              </PrivateRoute>
+            }
+            />
+
+            <Route
+            path="/products/add"
+            element={
+              <PrivateRoute>
+                <Header />
+                <AddProduct/>
               </PrivateRoute>
             }
             />
