@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProductById } from "../../services/services";
+import { getProductById } from "../../services/servicesOld";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from 'react-modal';
 

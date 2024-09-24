@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProductById, updateProduct } from "../../services/services";
+import { getProductById, updateProduct } from "../../services/servicesOld";
 import ProductForm from "../../components/productForm";
 import { toast } from "react-toastify";
 

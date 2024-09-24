@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard";
 import ProductFilter from "../../components/productFilter";
-import { getProducts, filterProducts } from "../../services/services";
+import { getProducts, filterProducts } from "../../services/servicesOld";
 import { useNavigate } from "react-router-dom";
 
 
