@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { getProductById } from "../../services/services";
+import { deleteProduct, getProductById } from "../../services/services";
 import { useNavigate, useParams } from "react-router-dom";
 import {  useAuth } from "../../contexts/authContext"
 import Modal from 'react-modal';
 import { useQuill } from 'react-quilljs';
 
 import 'quill/dist/quill.snow.css'; // Add css for snow theme
+import { toast } from "react-toastify";
 
 const customStyles = {
     content: {
@@ -52,7 +53,11 @@ export default function ProductDetail() {
     }
 
     function deleteItem(){
-        navigate("/products")
+        deleteProduct(product._id, user.token)
+        .then(()=>{
+            toast.success("Produto excluído com sucesso");
+            navigate("/products")
+        })
     }
 
     return (
