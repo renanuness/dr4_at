@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
   const login = (userData) => {
     axios.post("https://api-infnet-produtos-privado.vercel.app/auth", userData)
     .then(res =>  {
-      console.log(res.data);
       setUser(res.data);
       localStorage.setItem("@user", JSON.stringify(res.data));
       navigate("/products");
@@ -53,7 +52,6 @@ export const AuthProvider = ({ children }) => {
       }),
     })
       .then((res) => res.json())
-      .then(console.log)
       .catch((e) => toast.error("Erro ao atualizar os dados do usuário."));
   };
 

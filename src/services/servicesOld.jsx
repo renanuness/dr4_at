@@ -22,7 +22,6 @@ export function getProductById(id){
 }
 
 export function updateProduct(product){
-    console.log(product);
     return axios.put(`https://dummyjson.com/products/${product.id}`, {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

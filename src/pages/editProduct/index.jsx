@@ -15,7 +15,6 @@ export default function EditProduct() {
 
     useEffect(() => {
         getProductById(id, user.token).then(res => {
-            console.log(res)
             setProduct(res);
         })
     }, [])

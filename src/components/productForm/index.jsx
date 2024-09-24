@@ -32,7 +32,6 @@ export default function ProductForm(props){
     useEffect(()=>{
         getSuppliers(user.token)
         .then(data=>{
-            console.log(data);
             setSuppliers(data);
         })
     },[])
