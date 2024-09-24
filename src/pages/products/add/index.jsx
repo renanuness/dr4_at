@@ -30,7 +30,7 @@ export default function AddProduct(){
     return (
         <div>
             <h1>Add product</h1>
-            <ProductForm submit={p=>saveProduct(p)}action="add"/>
+            <ProductForm user={user}  submit={p=>saveProduct(p)}action="add"/>
         </div>
     );
 }

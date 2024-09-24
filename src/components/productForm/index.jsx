@@ -4,10 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css'; 
+import { getSuppliers } from "../../services/services";
+import { useAuth} from '../../contexts/authContext';
 
 export default function ProductForm(props){
+    const user = props.user
     const { quill, quillRef } = useQuill();
     const [product, setProduct] = useState(props.product);
+    const [suppliers, setSuppliers] = useState([]);
     const action = props.action;
     let firstLoad = true;
 
@@ -25,6 +29,13 @@ export default function ProductForm(props){
         props.submit(data);
     };
 
+    useEffect(()=>{
+        getSuppliers(user.token)
+        .then(data=>{
+            console.log(data);
+            setSuppliers(data);
+        })
+    },[])
 
     useEffect(()=>{
         reset(product);
@@ -33,7 +44,7 @@ export default function ProductForm(props){
     }, [product]);
 
     useEffect(() => {
-        if (quill && firstLoad) {
+        if (quill && firstLoad && action == 'edit') {
             quill.clipboard.dangerouslyPasteHTML(product.descricao);
             firstLoad = false;
         }
@@ -54,13 +65,21 @@ export default function ProductForm(props){
             />
             <p>{errors.nome?.message}</p>
 
-            <input
+            {/* <input
                 className="rounded-md mt-4 bg-slate-300 p-2 break-words"
                 type="text"
                 placeholder="Fornecedor"
                 {...register("fornecedor")}
             />
-            <p>{errors.fornecedor?.message}</p>
+            <p>{errors.fornecedor?.message}</p> */}
+
+            <label for="fornecedor">Fornecedor:</label>
+
+            <select {...register("fornecedor")} name="fornecedor" id="fornecedor">
+                {suppliers.map(supplier=>{
+                    return (<option selected={supplier.nome == product.fornecedor} value={supplier.nome}>{supplier.nome}</option>)
+                })}
+            </select>
 
             <input
                 className="rounded-md bg-slate-300 p-2"

@@ -30,7 +30,7 @@ export default function EditProduct() {
     return (
         <div>
         { product ? 
-            <ProductForm action="edit" submit={(p)=>editProductReq(p)}  product={product}/>
+            <ProductForm user={user} action="edit" submit={(p)=>editProductReq(p)}  product={product}/>
             : ''
         }
         </div>

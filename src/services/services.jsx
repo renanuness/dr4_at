@@ -47,3 +47,10 @@ export function deleteProduct(id, token){
       })
       .then(res => res.data);
 }
+
+export function getSuppliers(token){
+    return axios.get('https://api-infnet-produtos-privado.vercel.app/fornecedores',{
+        headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
+      })
+      .then(res=> {return res.data});
+}

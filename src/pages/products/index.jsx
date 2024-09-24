@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import ProductCard from "../../components/productCard";
-import { getProducts, filterProducts } from "../../services/services";
+import { getProducts } from "../../services/services";
 import { useNavigate } from "react-router-dom";
 
 import  {useAuth}  from "../../contexts/authContext";
