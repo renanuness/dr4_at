@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getProductById, updateProduct } from "../../services/servicesOld";
+import { getProductById, updateProduct } from "../../services/services";
 import ProductForm from "../../components/productForm";
 import { toast } from "react-toastify";
+import { useAuth } from "../../contexts/authContext";
 
 
 
 export default function EditProduct() {
+    const { user } = useAuth();
     const { id } = useParams();
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getProductById(id).then(res => {
+        getProductById(id, user.token).then(res => {
+            console.log(res)
             setProduct(res);
         })
     }, [])
 
     function editProductReq(prod){
-        updateProduct(prod).then(()=>{
+        updateProduct(prod, user.token).then(()=>{
             toast.success("Informações atualizadas com sucesso!");
             navigate("/products");
         })
@@ -27,7 +30,7 @@ export default function EditProduct() {
     return (
         <div>
         { product ? 
-            <ProductForm editProduct={(p)=>editProductReq(p)}  product={product}/>
+            <ProductForm action="edit" submit={(p)=>editProductReq(p)}  product={product}/>
             : ''
         }
         </div>

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import { getProductById } from "../../services/servicesOld";
+import { getProductById } from "../../services/services";
 import { useNavigate, useParams } from "react-router-dom";
+import {  useAuth } from "../../contexts/authContext"
 import Modal from 'react-modal';
+import { useQuill } from 'react-quilljs';
+
+import 'quill/dist/quill.snow.css'; // Add css for snow theme
 
 const customStyles = {
     content: {
@@ -15,7 +19,9 @@ const customStyles = {
   };
 
 export default function ProductDetail() {
+    const { quill, quillRef } = useQuill();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [product, setProduct] = useState({});
     const { id } = useParams();
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -34,15 +40,15 @@ export default function ProductDetail() {
     }
 
     useEffect(() => {
-        getProductById(id).then(
+        getProductById(id, user.token).then(
             res => {
                 setProduct(res);
             }
         )
-    })
+    }, [])
 
     function goToEdit() {
-        navigate("/editProduct/" + product.id);
+        navigate("/editProduct/" + product._id);
     }
 
     function deleteItem(){
@@ -64,22 +70,11 @@ export default function ProductDetail() {
                     <button className="rounded-md bg-red-200 p-2" onClick={closeModal}>Não</button>
                 </div>
             </Modal>
-            {/* <img className="w-48" src={product?.images[0]}/> */}
-            <p>{product.title}</p>
-            <p>{product.description}</p>
-            <p>R$ {product.price}</p>
-            <div className="flex flex-col items-start justify-center">
-                <p>Avaliações</p>
-                {product.reviews?.map((review, index) => {
-                    return (
-                        <div key={index} className="border">
-                            <p>{review.reviewerName}</p>
-                            <p>{review.rating}</p>
-                            <p>{review.comment}</p>
-                        </div>)
-                }
-                )}
-            </div>
+            <img className="w-48" src={product?.url_imagem}/>
+            <p>{product.nome}</p>
+            <p>R$ {product.preco}</p>
+            <p>{product.fornecedor}</p>
+            <div dangerouslySetInnerHTML={{__html: product.descricao}}></div>
             <div>
                 <button onClick={goToEdit} className="rounded-md bg-green-200 p-2">Editar</button>
                 <button onClick={openModal} className="rounded-md bg-red-200 p-2">Excluir</button>

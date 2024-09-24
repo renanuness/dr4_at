@@ -15,7 +15,7 @@ export function filterProducts(text){
 }
 
 export function getProductById(id){
-    return axios.get(`https://dummyjson.com/products/${id}`)
+    return axios.get(`https://api-infnet-produtos-privado.vercel.app/produtos/${id}`)
     .then(res=>{
         return res.data;
     })

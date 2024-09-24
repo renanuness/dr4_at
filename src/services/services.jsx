@@ -29,20 +29,21 @@ export function filterProducts(text){
     })
 }
 
-export function getProductById(id){
-    return axios.get(`https://dummyjson.com/products/${id}`)
+export function getProductById(id, token){
+    return axios.get(`https://api-infnet-produtos-privado.vercel.app/produtos/${id}`,{
+        headers: {
+            'Authorization': `${token}`
+            }
+    })
     .then(res=>{
         return res.data;
     })
 }
 
-export function updateProduct(product){
+export function updateProduct(product, token){
     console.log(product);
-    return axios.put(`https://dummyjson.com/products/${product.id}`, {
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      product
-    })
+    return axios.put(`https://api-infnet-produtos-privado.vercel.app/produtos/${product._id}`,product, {
+    headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
   })
   .then(res => res.data);
 }

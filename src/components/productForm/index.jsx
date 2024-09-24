@@ -9,6 +9,7 @@ export default function ProductForm(props){
     const { quill, quillRef } = useQuill();
     const [product, setProduct] = useState(props.product);
     const action = props.action;
+    let firstLoad = true;
 
     const {
         setValue,
@@ -21,24 +22,24 @@ export default function ProductForm(props){
         resolver: yupResolver(productSchema) });
 
     const onSubmit = async (data) => {
-        console.log(data);
         props.submit(data);
     };
 
-    useEffect(()=>{
-        setProduct(props.product);
-    },[])
 
     useEffect(()=>{
         reset(product);
+
+
     }, [product]);
 
     useEffect(() => {
+        if (quill && firstLoad) {
+            quill.clipboard.dangerouslyPasteHTML(product.descricao);
+            firstLoad = false;
+        }
         if (quill) {
           quill.on('text-change', (delta, oldDelta, source) => {
-            // console.log(quill.root.innerHTML); // Get innerHTML using quill
             setValue("descricao", quill.root.innerHTML);
-            
           });
         }
       }, [quill]);

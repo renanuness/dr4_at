@@ -14,7 +14,6 @@ export default function Products(){
     const [view, setView] = useState("grid");
     const [style, setStyle] = useState("flex flex-wrap gap-2 p-4 justify-center");
 
-    console.log(user.token);
     useEffect(()=>{
         getProducts(user.token).then(res=>{
             console.log(res);
@@ -41,7 +40,7 @@ export default function Products(){
             </div>
             <div className={style}>
             {products.map(product =>
-                <ProductCard key={product.id} product={product} productDetail={(id)=>navigate('/productDetail/'+id)}/>
+                <ProductCard key={product._id} product={product} productDetail={(id)=>navigate('/productDetail/'+id)}/>
             )}
             </div>
             <button onClick={()=>navigate("/products/add")} className="mb-2 p-2 border bg-blue-600">Adicionar produto</button>
