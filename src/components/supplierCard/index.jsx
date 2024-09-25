@@ -39,7 +39,7 @@ export default function SupplierCard(props) {
     }
 
     function editSupplier() {
-        navigate(`/editSupplier/${supplier._id}`)
+        navigate(`/editSupplier/${supplier._id}`, {state:{supplier}})
     }
 
     return (

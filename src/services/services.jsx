@@ -55,6 +55,7 @@ export function getSuppliers(token){
       .then(res=> {return res.data});
 }
 
+
 export function addSupplier(data, token){
     return axios.post('https://api-infnet-produtos-privado.vercel.app/fornecedores', data, {
         headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
