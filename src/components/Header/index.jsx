@@ -19,6 +19,7 @@ export default function Header() {
         <ul className="flex flex-row gap-5">
           <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/saved")}>Favoritos</li>
           <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/products")}>Produtos</li>
+          <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/suppliers")}>Fornecedores</li>
           <li className="border bg-orange-200 p-3 hover:cursor-pointer" onClick={()=>navigate("/user-info")}>Perfil de Usuário</li>
         </ul>
       </nav>

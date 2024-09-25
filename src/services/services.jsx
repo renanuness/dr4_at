@@ -54,3 +54,23 @@ export function getSuppliers(token){
       })
       .then(res=> {return res.data});
 }
+
+export function addSupplier(data, token){
+    return axios.post('https://api-infnet-produtos-privado.vercel.app/fornecedores', data, {
+        headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
+      }).then(res=>{return res.data});
+}
+
+export  function updateSupplier(data, token){
+    return axios.put(`https://api-infnet-produtos-privado.vercel.app/fornecedores/${data._id}`, data, {
+        headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
+      }).then(res=>{return res.data});
+}
+
+export function deleteSupplier(id, token){
+    console.log(token)
+    return axios.delete(`https://api-infnet-produtos-privado.vercel.app/fornecedores/${id}`, {
+        headers: { 'Content-Type': 'application/json','Authorization':`${token}` },
+      })
+      .then(res=>{return res.data});
+}
